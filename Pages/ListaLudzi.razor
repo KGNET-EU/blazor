@@ -1,0 +1,93 @@
+﻿@page "/listaludzi"
+
+@using Startowa.Data
+
+@inject OsobaService OsobyDane
+
+
+
+<h1>Lista osób w mojej firmie</h1>
+
+
+
+@if (listaOsob == null)
+
+{
+
+< p >< em > Loading...</ em ></ p >
+
+}
+
+else
+
+{
+
+<table class="table table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th scope="col">#</th>
+
+            <th scope="col">Imię</th>
+
+            <th scope="col">Nazwisko</th>
+
+            <th scope="col">Wiek</th>
+
+            <th scope="col">Czy poprawny</th>
+
+            <th scope="col">Sparowane - Nazwisko</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in listaOsob)
+
+        {
+
+<tr>
+
+    <td>1</td>
+
+    <td>@item.Imie</td>
+
+    <td>@item.Nazwisko</td>
+
+    <td>@item.Wiek</td>
+
+    <td>@item.CzyPoprawnie</td>
+
+    <td>@item.Wylosowany</td>
+
+</tr>
+
+}
+
+    </tbody>
+
+</table>
+
+}
+
+
+
+@code {
+
+        private List<Osoba> listaOsob;
+
+
+
+            protected override async Task OnInitializedAsync()
+
+            {
+
+            listaOsob = await OsobaService.GetListaLudzi();
+
+            }
+
+}​​
